@@ -76,8 +76,8 @@ class docker::install {
       }
     }
     'RedHat': {
-      if versioncmp($::operatingsystemrelease, '6.5') < 0 {
-        fail('Docker needs RedHat/CentOS version to be at least 6.5.')
+      if versioncmp($::operatingsystemrelease, '6.4') < 0 {
+        fail('Docker needs RedHat/CentOS version to be at least 6.4.')
       }
 
       $manage_kernel = false
