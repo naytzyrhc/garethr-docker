@@ -116,7 +116,7 @@ case "$1" in
     stop
     ;;
     status)
-    docker inspect $(cat $cidfile)
+    docker inspect --format "{{ .State.Running }}" $(cat $cidfile) | grep true
     ;;
     restart|reload)
     stop
