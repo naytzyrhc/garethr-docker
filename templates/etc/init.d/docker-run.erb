@@ -110,13 +110,19 @@ stop() {
 
 case "$1" in
     start)
+<% if @use_name %>
+    STAT=$(docker inspect --format "{{ .State.Running }}" <%= @name %> 2>/dev/null |grep false)
+    if [ "$STAT" == "false" ]; then
+       docker rm <%= @name %>
+    fi
+<% end %>
     start
     ;;
     stop)
     stop
     ;;
     status)
-    docker inspect --format "{{ .State.Running }}" $(cat $cidfile) | grep true
+    docker inspect --format "{{ .State.Running }}" $(cat $cidfile) 2>/dev/null| grep true
     ;;
     restart|reload)
     stop
